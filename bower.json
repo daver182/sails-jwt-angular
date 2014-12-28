@@ -15,6 +15,7 @@
   ],
   "dependencies": {
     "angular": "*",
-    "angular-route": "*"
+    "angular-route": "*",
+    "bootstrap": "*"
   }
 }
