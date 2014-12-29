@@ -1,21 +1,23 @@
 {
-  "name": "client",
-  "version": "0.0.0",
-  "authors": [
-    "Daniel <daver182@gmail.com>"
-  ],
-  "license": "MIT",
-  "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "angular": "*",
-    "angular-route": "*",
-    "bootstrap": "*"
-  }
+	"name": "client",
+	"version": "0.0.0",
+	"authors": [
+		"Daniel <daver182@gmail.com>"
+	],
+	"license": "MIT",
+	"private": true,
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"tests"
+	],
+	"dependencies": {
+		"angular": "*",
+		"angular-route": "*",
+		"angular-jwt": "*",
+		"angular-local-storage": "*",
+		"bootstrap": "*"
+	}
 }
