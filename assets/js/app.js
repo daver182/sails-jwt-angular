@@ -25,11 +25,13 @@ app.config(['$routeProvider', 'jwtInterceptorProvider', '$httpProvider', functio
 	$httpProvider.interceptors.push('jwtInterceptor');
 }]);
 
-app.run(function($rootScope, $location, Auth) {
+app.run(function($rootScope, $location, localStorageService, jwtHelper) {
 	$rootScope.$on('$routeChangeStart', function(e, nextRoute) {
         if (nextRoute.$$route.originalPath !== "/login" && !localStorageService.get('jwt')) {
-			e.preventDefault();
-			$location.path('/login');
+        	if(!jwtHelper.isTokenExpired(localStorageService.get('jwt'))){
+        		e.preventDefault();
+				$location.path('/login');
+        	}
 		}
 	});
 });
