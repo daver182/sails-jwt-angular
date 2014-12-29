@@ -11,6 +11,7 @@ var jsFilesToInject = [
 	'components/angular-route/*.min.js',
 	'components/angular-jwt/*.min.js',
 	'components/angular-local-storage/*.min.js',
+	'js/**/*.js'
 ];
 
 
