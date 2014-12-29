@@ -8,9 +8,8 @@ var jsFilesToInject = [
 	'components/jquery/*.min.js',
 	'components/bootstrap/js/*.min.js',
 	'components/angular/angular.js',
-	'components/angular-route/*.min.js',
-	'components/angular-jwt/*.min.js',
-	'components/angular-local-storage/*.min.js',
+    'components/ui-router/*.min.js',
+	'components/satellizer/*.min.js',
 	'js/**/*.js'
 ];
 

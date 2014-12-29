@@ -1,20 +1,4 @@
-/**
- * Copy files and folders.
- *
- * ---------------------------------------------------------------
- *
- * # dev task config
- * Copies all directories and files, exept coffescript and less fiels, from the sails
- * assets folder into the .tmp/public directory.
- *
- * # build task config
- * Copies all directories nd files from the .tmp/public directory into a www directory.
- *
- * For usage docs see:
- * 		https://github.com/gruntjs/grunt-contrib-copy
- */
 module.exports = function(grunt) {
-
 	grunt.config.set('copy', {
 		dev: {
 			files: [{
@@ -32,21 +16,16 @@ module.exports = function(grunt) {
 				cwd: './bower_components/angular',
 				src: ['*.js'],
 				dest: '.tmp/public/components/angular'
-			},{ //Angular Route
+			},{ //satellizer
 				expand: true,
-				cwd: './bower_components/angular-route',
+				cwd: './bower_components/satellizer',
 				src: ['*.js'],
-				dest: '.tmp/public/components/angular-route'
-			},{ //Angular Jwt
+				dest: '.tmp/public/components/satellizer'
+			},{ //ui-router
 				expand: true,
-				cwd: './bower_components/angular-jwt/dist',
+				cwd: './bower_components/ui-router/release',
 				src: ['**/*'],
-				dest: '.tmp/public/components/angular-jwt'
-			},{ //angular-local-storage
-				expand: true,
-				cwd: './bower_components/angular-local-storage/dist',
-				src: ['**/*'],
-				dest: '.tmp/public/components/angular-local-storage'
+				dest: '.tmp/public/components/ui-router'
 			},{ //Bootstrap
 				expand: true,
 				cwd: './bower_components/bootstrap/dist',
