@@ -27,12 +27,20 @@ app.config(['$routeProvider', 'jwtInterceptorProvider', '$httpProvider', functio
 
 app.run(function($rootScope, $location, localStorageService, jwtHelper) {
 	$rootScope.$on('$routeChangeStart', function(e, nextRoute) {
-        if (nextRoute.$$route.originalPath !== "/login" && !localStorageService.get('jwt')) {
-        	if(!jwtHelper.isTokenExpired(localStorageService.get('jwt'))){
-        		e.preventDefault();
-				$location.path('/login');
-        	}
-		}
+        if (nextRoute.$$route.originalPath !== "/login"){
+            if(localStorageService.get('jwt') && jwtHelper.isTokenExpired(localStorageService.get('jwt'))){
+                console.log('token expirado');
+                e.preventDefault();
+                $location.path('/login');
+                return;
+            }
+            
+            if (nextRoute.$$route.originalPath !== "/login" && !localStorageService.get('jwt')) {
+                console.log('token no existe');
+                e.preventDefault();
+                $location.path('/login');
+            }
+        }
 	});
 });
 
