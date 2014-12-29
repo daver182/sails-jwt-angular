@@ -8,6 +8,10 @@ app.config(['$routeProvider', 'jwtInterceptorProvider', '$httpProvider', functio
 			templateUrl: '/templates/home.html',
 			controller: 'HomeCtrl'
 		})
+		.when('/login', {
+			templateUrl: '/templates/login.html',
+			controller: 'LoginCtrl'
+		})
 		.otherwise({ redirectTo: '/' });
 
 	jwtInterceptorProvider.tokenGetter = function(localStorageService) {
@@ -19,4 +23,18 @@ app.config(['$routeProvider', 'jwtInterceptorProvider', '$httpProvider', functio
 
 app.controller('HomeCtrl', ['$scope', function($scope) {
 	$scope.title = 'Home Controller';
+}]);
+
+app.controller('LoginCtrl', ['$scope', 'localStorageService', function($scope, localStorageService) {
+	$scope.login = function() {
+		$http({
+			url: '/auth/authenticate',
+			method: 'POST',
+			data: $scope.user
+		}).then(function(response) {
+			localStorageService.set('jwt', response.data.token);
+		}, function(error) {
+			console.log(error.data);
+		});
+	}
 }]);
