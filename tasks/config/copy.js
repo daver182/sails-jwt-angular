@@ -22,6 +22,11 @@ module.exports = function(grunt) {
 				cwd: './assets',
 				src: ['**/*.!(coffee|less)'],
 				dest: '.tmp/public'
+			},{ //Jquery
+				expand: true,
+				cwd: './bower_components/jquery/dist',
+				src: ['**/*'],
+				dest: '.tmp/public/components/jquery'
 			},{ //Angular
 				expand: true,
 				cwd: './bower_components/angular',
