@@ -26,8 +26,8 @@ app.config(['$routeProvider', 'jwtInterceptorProvider', '$httpProvider', functio
 }]);
 
 app.run(function($rootScope, $location, Auth) {
-	$rootScope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams) {
-		if (!localStorageService.get('jwt')) {
+	$rootScope.$on('$routeChangeStart', function(e, nextRoute) {
+        if (nextRoute.$$route.originalPath !== "/login" && !localStorageService.get('jwt')) {
 			e.preventDefault();
 			$location.path('/login');
 		}
