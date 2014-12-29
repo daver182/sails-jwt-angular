@@ -25,6 +25,15 @@ app.config(['$routeProvider', 'jwtInterceptorProvider', '$httpProvider', functio
 	$httpProvider.interceptors.push('jwtInterceptor');
 }]);
 
+app.run(function($rootScope, $location, Auth) {
+	$rootScope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams) {
+		if (!localStorageService.get('jwt')) {
+			e.preventDefault();
+			$location.path('/login');
+		}
+	});
+});
+
 app.controller('HomeCtrl', ['$scope', '$http', function($scope, $http) {
 	$scope.title = 'Home Controller';
 	$http({
