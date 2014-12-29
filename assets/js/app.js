@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module( 'app', ['ngRoute', 'angular-jwt', 'LocalStorageModule']);
+var app = angular.module('app', ['ngRoute', 'angular-jwt', 'LocalStorageModule']);
 
 app.config(['$routeProvider', 'jwtInterceptorProvider', '$httpProvider', function ($routeProvider, jwtInterceptorProvider, $httpProvider) {
 	$routeProvider
@@ -15,7 +15,7 @@ app.config(['$routeProvider', 'jwtInterceptorProvider', '$httpProvider', functio
 	}
 
 	$httpProvider.interceptors.push('jwtInterceptor');
-})
+}]);
 
 app.controller('HomeCtrl', ['$scope', function($scope) {
 	$scope.title = 'Home Controller';
