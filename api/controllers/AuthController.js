@@ -5,10 +5,10 @@ module.exports = {
 
 		if (!email || !password) return res.json(401, {err: 'username and password required'});
 
-		Auth.findOneByEmail(email, function(err, user) {
+		User.findOneByEmail(email, function(err, user) {
 		if (!user) return res.json(401, {err: 'invalid username or password'});
 		
-		Auth.validPassword(password, user, function(err, valid) {
+		User.validPassword(password, user, function(err, valid) {
 			if (err) return res.json(403, {err: 'forbidden'});
 
 			if (!valid) {
@@ -26,7 +26,7 @@ module.exports = {
 			return res.json(401, {err: 'Password doesn\'t match'});
 		}
 
-		Auth.create({email: req.body.email, password: req.body.password}).exec(function(err, user) {
+		User.create({email: req.body.email, password: req.body.password}).exec(function(err, user) {
 			if (err) {
 				res.json(err.status, {err: err});
 				return;
