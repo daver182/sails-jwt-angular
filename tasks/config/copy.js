@@ -34,12 +34,12 @@ module.exports = function(grunt) {
 				dest: '.tmp/public/components/angular-route'
 			},{ //Angular Jwt
 				expand: true,
-				cwd: './bower_components/angular-jwt',
+				cwd: './bower_components/angular-jwt/dist',
 				src: ['**/*'],
 				dest: '.tmp/public/components/angular-jwt'
 			},{ //angular-local-storage
 				expand: true,
-				cwd: './bower_components/angular-local-storage',
+				cwd: './bower_components/angular-local-storage/dist',
 				src: ['**/*'],
 				dest: '.tmp/public/components/angular-local-storage'
 			},{ //Bootstrap
