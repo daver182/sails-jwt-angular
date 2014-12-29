@@ -29,7 +29,7 @@ app.controller('HomeCtrl', ['$scope', function($scope) {
 	$scope.title = 'Home Controller';
 }]);
 
-app.controller('LoginCtrl', ['$scope', 'localStorageService', '$http', function($scope, localStorageService, $http) {
+app.controller('LoginCtrl', ['$scope', 'localStorageService', '$http', '$location', function($scope, localStorageService, $http, $location) {
 	$scope.login = function() {
 		$http({
 			url: '/auth/authenticate',
@@ -37,13 +37,14 @@ app.controller('LoginCtrl', ['$scope', 'localStorageService', '$http', function(
 			data: $scope.user
 		}).then(function(response) {
 			localStorageService.set('jwt', response.data.token);
+			$location.path('/');
 		}, function(error) {
 			console.log(error.data);
 		});
 	}
 }]);
 
-app.controller('RegisterCtrl', ['$scope', 'localStorageService', '$http', function($scope, localStorageService, $http) {
+app.controller('RegisterCtrl', ['$scope', 'localStorageService', '$http', '$location', function($scope, localStorageService, $http, $location) {
 	$scope.register = function() {
 		$http({
 			url: '/auth/register',
@@ -51,6 +52,7 @@ app.controller('RegisterCtrl', ['$scope', 'localStorageService', '$http', functi
 			data: $scope.user
 		}).then(function(response) {
 			localStorageService.set('jwt', response.data.token);
+			$location.path('/');
 		}, function(error) {
 			console.log(error.data);
 		});
