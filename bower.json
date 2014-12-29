@@ -1,27 +1,29 @@
 {
-	"name": "client",
-	"version": "0.0.0",
-	"authors": [
-		"Daniel <daver182@gmail.com>"
-	],
-	"license": "MIT",
-	"private": true,
-	"ignore": [
-		"**/.*",
-		"node_modules",
-		"bower_components",
-		"test",
-		"tests"
-	],
-	"dependencies": {
-		"jquery": "~2.1.1",
-		"angular": "*",
-		"angular-route": "*",
-		"angular-jwt": "*",
-		"angular-local-storage": "*",
-		"bootstrap": "*"
-	},
-	"resolutions": {
-		"angular": "~1.2.23"
-	}
+  "name": "client",
+  "version": "0.0.0",
+  "authors": [
+    "Daniel <daver182@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "angular": "*",
+    "angular-route": "*",
+    "angular-jwt": "*",
+    "angular-local-storage": "*",
+    "bootstrap": "*",
+    "ui-router": "~0.2.13",
+    "satellizer": "~0.8.7"
+  },
+  "resolutions": {
+    "angular": "~1.2.23"
+  }
 }

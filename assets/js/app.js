@@ -1,9 +1,9 @@
 'use strict';
 
-var app = angular.module('app', ['ngRoute', 'angular-jwt', 'LocalStorageModule']);
+var app = angular.module('app', ['ui.router', 'angular-jwt', 'satellizer']);
 
-app.config(['$routeProvider', 'jwtInterceptorProvider', '$httpProvider', function ($routeProvider, jwtInterceptorProvider, $httpProvider) {
-	$routeProvider
+app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', function ($stateProvider, $urlRouterProvider, $authProvider) {
+	/*$routeProvider
 		.when('/', {
 			templateUrl: '/templates/home.html',
 			controller: 'HomeCtrl'
@@ -16,33 +16,62 @@ app.config(['$routeProvider', 'jwtInterceptorProvider', '$httpProvider', functio
 			templateUrl: '/templates/register.html',
 			controller: 'RegisterCtrl'
 		})
-		.otherwise({ redirectTo: '/' });
+		.otherwise({ redirectTo: '/' });*/
 
-	jwtInterceptorProvider.tokenGetter = function(localStorageService) {
+	$stateProvider
+		.state('home', {
+			url: '/',
+			templateUrl: '/templates/home.html',
+			controller: 'HomeCtrl'
+			resolve: {
+				authenticated: function($q, $state, $auth) {
+					var deferred = $q.defer();
+
+					if (!$auth.isAuthenticated()) {
+						$state.go('login');
+					} else {
+						deferred.resolve();
+					}
+
+					return deferred.promise;
+				}
+			}
+		})
+		.state('login', {
+			url: '/login',
+			templateUrl: '/templates/login.html',
+			controller: 'LoginCtrl'
+		})
+		.state('signup', {
+			url: '/signup',
+			templateUrl: '/templates/signup.html',
+			controller: 'RegisterCtrl'
+		});
+
+	$urlRouterProvider.otherwise('/');
+
+	/*jwtInterceptorProvider.tokenGetter = function(localStorageService) {
 		return localStorageService.get('jwt');
 	}
 
-	$httpProvider.interceptors.push('jwtInterceptor');
+	$httpProvider.interceptors.push('jwtInterceptor');*/
 }]);
 
-app.run(function($rootScope, $location, localStorageService, jwtHelper) {
+/*app.run(function($rootScope, $location, localStorageService, jwtHelper) {
 	$rootScope.$on('$routeChangeStart', function(e, nextRoute) {
-        if (nextRoute.$$route.originalPath !== "/login"){
-            if(localStorageService.get('jwt') && jwtHelper.isTokenExpired(localStorageService.get('jwt'))){
-                console.log('token expirado');
-                e.preventDefault();
-                $location.path('/login');
-                return;
-            }
-            
-            if (nextRoute.$$route.originalPath !== "/login" && !localStorageService.get('jwt')) {
-                console.log('token no existe');
+        if (nextRoute.$$route.originalPath !== '/login'){
+            if(localStorageService.get('jwt')){
+                if(jwtHelper.isTokenExpired(localStorageService.get('jwt'))){
+                    e.preventDefault();
+        		    $location.path('/login');
+                }
+    		}else{
                 e.preventDefault();
                 $location.path('/login');
             }
         }
 	});
-});
+});*/
 
 app.controller('HomeCtrl', ['$scope', '$http', function($scope, $http) {
 	$scope.title = 'Home Controller';
@@ -56,8 +85,8 @@ app.controller('HomeCtrl', ['$scope', '$http', function($scope, $http) {
 	});
 }]);
 
-app.controller('LoginCtrl', ['$scope', 'localStorageService', '$http', '$location', function($scope, localStorageService, $http, $location) {
-	$scope.login = function() {
+app.controller('LoginCtrl', ['$scope', 'localStorageService', '$http', '$location', function($scope, $state) {
+	/*$scope.login = function() {
 		$http({
 			url: '/auth/authenticate',
 			method: 'POST',
@@ -68,11 +97,11 @@ app.controller('LoginCtrl', ['$scope', 'localStorageService', '$http', '$locatio
 		}, function(error) {
 			console.log(error.data);
 		});
-	}
+	}*/
 }]);
 
-app.controller('RegisterCtrl', ['$scope', 'localStorageService', '$http', '$location', function($scope, localStorageService, $http, $location) {
-	$scope.register = function() {
+app.controller('RegisterCtrl', ['$scope', 'localStorageService', '$http', '$location', function($scope, $state) {
+	/*$scope.register = function() {
 		$http({
 			url: '/auth/register',
 			method: 'POST',
@@ -83,5 +112,5 @@ app.controller('RegisterCtrl', ['$scope', 'localStorageService', '$http', '$loca
 		}, function(error) {
 			console.log(error.data);
 		});
-	}
+	}*/
 }]);
