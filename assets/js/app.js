@@ -25,8 +25,16 @@ app.config(['$routeProvider', 'jwtInterceptorProvider', '$httpProvider', functio
 	$httpProvider.interceptors.push('jwtInterceptor');
 }]);
 
-app.controller('HomeCtrl', ['$scope', function($scope) {
+app.controller('HomeCtrl', ['$scope', '$http', function($scope, $http) {
 	$scope.title = 'Home Controller';
+	$http({
+		url: '/test/restricted',
+		method: 'GET'
+	}).then(function(response) {
+		$scope.datos = response.data;
+	}, function(error) {
+		console.log(error.data);
+	});
 }]);
 
 app.controller('LoginCtrl', ['$scope', 'localStorageService', '$http', '$location', function($scope, localStorageService, $http, $location) {
