@@ -14,10 +14,14 @@
 		"tests"
 	],
 	"dependencies": {
+		"jquery": "~2.1.1",
 		"angular": "*",
 		"angular-route": "*",
 		"angular-jwt": "*",
 		"angular-local-storage": "*",
 		"bootstrap": "*"
+	},
+	"resolutions": {
+		"angular": "~1.2.23"
 	}
 }

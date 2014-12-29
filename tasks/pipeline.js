@@ -1,37 +1,16 @@
-/**
- * grunt/pipeline.js
- *
- * The order in which your css, javascript, and template files should be
- * compiled and linked from your views and static HTML files.
- *
- * (Note that you can take advantage of Grunt-style wildcard/glob/splat expressions
- * for matching multiple files.)
- */
-
-
-
-// CSS files to inject in order
-//
-// (if you're using LESS with the built-in default config, you'll want
-//  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
-  'styles/**/*.css'
+	'styles/**/*.css',
+	'components/bootstrap/css/bootstrap.min.css',
 ];
 
 
-// Client-side javascript files to inject in order
-// (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
-  
-  // Load sails.io before everything else
-  'js/dependencies/sails.io.js',
-
-  // Dependencies like jQuery, or Angular are brought in here
-  'js/dependencies/**/*.js',
-
-  // All of the rest of your client-side js files
-  // will be injected here in no particular order.
-  'js/**/*.js'
+	'components/jquery/*.min.js',
+	'components/bootstrap/js/*.min.js',
+	'components/angular/angular.js',
+	'components/angular-route/*.min.js',
+	'components/angular-jwt/*.min.js',
+	'components/angular-local-storage/*.min.js',
 ];
 
 
